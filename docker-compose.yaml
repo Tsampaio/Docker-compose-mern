@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  mongodb:
+    image: 'mongo'
+    volumes:
+      - data:/data/db
+    # environment: 
+    #   MONGO_INITDB_ROOT_USERNAME: telmo (just a test)
+    #   - MONGO_INITDB_ROOT_USERNAME=telmo
+    #   MONGO_INITDB_ROOT_PASSWORD: secretpass (just a test)
+    env_file:
+      - ./env/mongo.env
+    # networks: (optional, Docker creates automatically some network)
+    #   - my-network-name
+  # backend:
+
+  # frontend:
+
+# Only named volumes needed here, no bind mounts or anonymous volumes
+volumes: 
+  data:
