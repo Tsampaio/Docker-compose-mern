@@ -12,10 +12,26 @@ services:
       - ./env/mongo.env
     # networks: (optional, Docker creates automatically some network)
     #   - my-network-name
-  # backend:
-
+  backend:
+    build: ./backend #(goes inside of backend folder and follows Dockerfile instructions)
+    # context: ./backend
+    # dockerfile: Dockerfile-dev #if Docker file has a different name
+    # args:
+    #   some-arg: 1
+    ports:
+      - '80:80'
+      # - '5000:5000' if multiple ports exposed
+    volumes:
+      - logs:/app/logs
+      - ./backend:/app
+      - /app/node_modules
+    env_file:
+      - ./env/backend.env
+    depends_on:
+      - mongodb
   # frontend:
 
 # Only named volumes needed here, no bind mounts or anonymous volumes
 volumes: 
   data:
+  logs:
